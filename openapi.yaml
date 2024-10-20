@@ -19,7 +19,7 @@ paths:
       summary: Get all orders / Get orders by status
       operationId: getOrders
       parameters:
-        - in: path
+        - in: query
           name: status
           required: false
           description: Order status
@@ -88,6 +88,14 @@ paths:
         - "Orders"
       summary: Get order by order number
       operationId: getOrder
+      parameters:
+        - in: path
+          name: order_number
+          required: true
+          description: Unique identifier of the order
+          schema:
+            type: string
+            example: "W1P31K47"
       responses:
         200:
           description: Successful operation
@@ -146,14 +154,14 @@ paths:
                 $ref: '#/components/schemas/500Response'
   /v1/order/create:
     parameters:
-      - in: path
+      - in: query
         name: total_amount
         required: true
         description: Total amount
         schema:
           type: number
           example: 100.00
-      - in: path
+      - in: query
         name: products
         required: true
         description: Products
@@ -245,28 +253,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/500Response'
 components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
   schemas:
     # Requests
-    400Response:
-      type: object
-      properties:
-        message:
-          type: string
-          example: "No such user found!."
-        errors:
-          type: array
-          items:
-            type: object
-    404Response:
-      type: object
-      properties:
-        message:
-          type: string
-          example: "Object not found"
     422Response:
       type: object
       properties:
@@ -283,10 +271,3 @@ components:
         message:
           type: string
           default: "Server Error"
-    Success:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: true
-
