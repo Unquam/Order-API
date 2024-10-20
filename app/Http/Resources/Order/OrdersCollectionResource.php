@@ -21,7 +21,13 @@ class OrdersCollectionResource extends ResourceCollection
                 'id' => $query['id'],
                 'order_number' => $query['order_number'],
                 'total_amount' => $query['total_amount'],
-                'products' => json_decode($query['products'], false, 512, JSON_THROW_ON_ERROR),
+                'products' => collect($query['products'])->map(function($product) {
+                    return [
+                        'product_name' => $product['product_name'],
+                        'quantity' => $product['quantity'],
+                        'price' => $product['price']
+                    ];
+                }),
                 'status' => $query['status'],
                 'created_at' => Carbon::parse($query['created_at'])->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::parse($query['updated_at'])->format('Y-m-d H:i:s')

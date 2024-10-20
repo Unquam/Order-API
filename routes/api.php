@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'v1'], static function () {
     Route::get('/orders', [OrderController::class, 'getOrders'])->name('orders.list');
     Route::get('/orders/{order_number}', [OrderController::class, 'getOrder'])->name('orders.show');
-    Route::post('/orders', [OrderController::class, 'createOrder'])->name('orders.create');
+    Route::post('/order/create', [OrderController::class, 'createOrder'])->name('orders.create');
 });
 
 //If you need authentication use sanctum middleware
