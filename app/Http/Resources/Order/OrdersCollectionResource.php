@@ -20,6 +20,7 @@ class OrdersCollectionResource extends ResourceCollection
             return [
                 'id' => $query['id'],
                 'order_number' => $query['order_number'],
+                'user_id' => $query['user_id'],
                 'total_amount' => $query['total_amount'],
                 'products' => collect($query['products'])->map(function($product) {
                     return [

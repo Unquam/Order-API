@@ -18,6 +18,7 @@ class OrderCollectionResource extends JsonResource
         return [
             'id' => $this->id,
             'order_number' => $this->order_number,
+            'user_id' => $this->user_id,
             'total_amount' => $this->total_amount,
             'status' => $this->status,
             'products' => collect($this->products)->map(function($product) {
