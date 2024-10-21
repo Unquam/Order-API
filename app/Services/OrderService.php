@@ -30,7 +30,7 @@ class OrderService
     public function getAllOrders(string $status = null): Collection|array
     {
         $query = $this->model->select([
-            'id', 'order_number', 'total_amount',
+            'id', 'order_number', 'user_id','total_amount',
             'status', 'products', 'created_at', 'updated_at'
         ]);
 
@@ -50,6 +50,7 @@ class OrderService
     public function createOrderByRequest(array $params): Model|bool
     {
         try {
+            //No logic create with user_id (no auth), just create the order
             return $this->model->create($params);
         } catch (\Throwable $exception) {
             logger('Order not created in OrderService method createOrderByRequest: '
